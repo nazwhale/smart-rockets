@@ -27,9 +27,12 @@ function Rocket() {
   }
 
   this.show = function() {
+    push();
+    translate(this.position.x, this.position.y);
+    rotate(this.velocity.heading());
     rectMode(CENTER);
-    rect(this.position.x, this.position.y, 10, 50);
-
+    rect(0, 0, 50, 10);
+    pop();
   }
 }
 
