@@ -21,7 +21,6 @@ function draw() {
   count++;
 
   if (count == lifespan) {
-    console.log(population);
     population.evaluate();
     population.selection();
     count = 0;

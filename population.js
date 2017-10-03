@@ -1,6 +1,6 @@
 function Population() {
   this.rockets = [];
-  this.popSize = 100;
+  this.popSize = 25;
   this.matingPool = []
 
   for(var i = 0; i < this.popSize; i++) {
@@ -38,6 +38,7 @@ function Population() {
       var fatherDNA = random(this.matingPool).dna;
       var motherDNA = random(this.matingPool).dna;
       var childDNA = fatherDNA.crossover(motherDNA);
+      childDNA.mutate();
       babies[i] = new Rocket(childDNA);
     }
     this.rockets = babies;
