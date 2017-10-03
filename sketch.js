@@ -1,16 +1,22 @@
 var rocket;
 var population;
 var lifespan = 200;
+var lifeP;
+var count = 0;
+var target;
 
 function setup() {
   createCanvas(400, 300);
   rocket = new Rocket();
   population = new Population();
+  lifeP = createP();
 }
 
 function draw() {
   background(0);
   population.run();
+  lifeP.html(count);
+  count++;
 }
 
 function Population() {
@@ -42,15 +48,13 @@ function Rocket() {
   this.velocity = createVector();
   this.acceleration = createVector();
   this.dna = new DNA();
-  this.count = 0;
 
   this.applyForce = function(force) {
     this.acceleration.add(force);
   }
 
   this.update = function() {
-    this.applyForce(this.dna.genes[this.count]);
-    this.count++;
+    this.applyForce(this.dna.genes[count]);
 
     this.velocity.add(this.acceleration);
     this.position.add(this.velocity);
