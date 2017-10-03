@@ -24,6 +24,7 @@ function Population() {
     
     this.matingPool = [];
 
+    // the fitter the rocket, the greater the chance of it being selected from the mating pool
     for (var i = 0; i < this.popSize; i++) {
       var n = this.rockets[i].fitness * 100;
       for (var j = 0; j < n; j++) {
