@@ -3,6 +3,7 @@ function Rocket(dna) {
   this.velocity = createVector();
   this.acceleration = createVector();
   this.completed = false;
+  this.crashed = false;
   if (dna) {
     this.dna = dna;
   } else {
@@ -20,6 +21,9 @@ function Rocket(dna) {
     if (this.completed) {
       this.fitness *= 10;
     }
+    if (this.crashed) {
+      this.fitness = 1;
+    }
   }
 
   this.update = function() {
@@ -29,8 +33,12 @@ function Rocket(dna) {
       this.position = target.copy();
     }
 
+    if (this.position.x > rx && this.position.x < rx + rw && this.position.y > ry && this.position.y < ry + rh) {
+      this.crashed = true;
+    }
+
     this.applyForce(this.dna.genes[count]);
-    if (!this.completed) {
+    if (!this.completed && !this.crashed) {
       this.velocity.add(this.acceleration);
       this.position.add(this.velocity);
       this.acceleration.mult(0);
