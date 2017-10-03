@@ -18,22 +18,31 @@ function Rocket(dna) {
   this.calcFitness = function() {
     var distance = dist(this.position.x, this.position.y, target.x, target.y);
     this.fitness = map(distance, 0, width, width, 0);
+
     if (this.completed) {
-      this.fitness *= 10;
+      console.log(this.fitness);
+      this.fitness *= 10 + (lifespan - count);
+      console.log(this.fitness);
     }
     if (this.crashed) {
-      this.fitness = 1;
+      this.fitness /= 10;
     }
   }
 
   this.update = function() {
-    var distance = dist(this.position.x, this.position.y, target.x, target.y);
-    if (distance < 10) {
+    var targetDistance = dist(this.position.x, this.position.y, target.x, target.y);
+    if (targetDistance < 10) {
       this.completed = true;
       this.position = target.copy();
     }
 
     if (this.position.x > rx && this.position.x < rx + rw && this.position.y > ry && this.position.y < ry + rh) {
+      this.crashed = true;
+    }
+    if (this.position.x > width || this.position.x < 0) {
+      this.crashed = true;
+    }
+    if (this.position.y > height || this.position.y < 0) {
       this.crashed = true;
     }
 
@@ -42,6 +51,7 @@ function Rocket(dna) {
       this.velocity.add(this.acceleration);
       this.position.add(this.velocity);
       this.acceleration.mult(0);
+      this.velocity.limit(4);
     }
   }
 
