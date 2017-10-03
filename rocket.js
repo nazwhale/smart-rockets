@@ -10,6 +10,10 @@ function Rocket(dna) {
     this.dna = new DNA;
   }
   this.fitness = 0;
+  this.finishTime = 0;
+  this.crashTime = 0;
+  //this.speedBonus; getting to the end faster is rewarded
+  //this.lifeBonus; staying alive longer is rewarded
 
   this.applyForce = function(force) {
     this.acceleration.add(force);
@@ -21,11 +25,17 @@ function Rocket(dna) {
 
     if (this.completed) {
       console.log(this.fitness);
-      this.fitness *= 10 + (lifespan - count);
+      console.log("Finish time: " + this.finishTime);
+      this.fitness += this.finishTime * 5;          //speed bonus
+      this.fitness *= 10;
       console.log(this.fitness);
     }
     if (this.crashed) {
       this.fitness /= 10;
+      this.fitness += (lifespan - this.crashTime);  //value age
+      if (this.crashTime < 25) {                    //immediate crashers die out
+        this.fitness = 1;
+      }
     }
   }
 
@@ -34,16 +44,20 @@ function Rocket(dna) {
     if (targetDistance < 10) {
       this.completed = true;
       this.position = target.copy();
+      this.finishTime += 1;
     }
 
     if (this.position.x > rx && this.position.x < rx + rw && this.position.y > ry && this.position.y < ry + rh) {
       this.crashed = true;
+      this.crashTime += 1;
     }
     if (this.position.x > width || this.position.x < 0) {
       this.crashed = true;
+      this.crashTime += 1;
     }
     if (this.position.y > height || this.position.y < 0) {
       this.crashed = true;
+      this.crashTime += 1;
     }
 
     this.applyForce(this.dna.genes[count]);
@@ -53,6 +67,7 @@ function Rocket(dna) {
       this.acceleration.mult(0);
       this.velocity.limit(4);
     }
+
   }
 
   this.show = function() {
