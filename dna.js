@@ -1,4 +1,5 @@
-function DNA(genes) {
+function DNA(mutationAgent, genes) {
+
   if (genes) {
     this.genes = genes;
   } else {
@@ -20,15 +21,17 @@ function DNA(genes) {
         newGenes[i] = partner.genes[i];
       }
     }
-    return new DNA(newGenes);
+    return new DNA(mutationAgent, newGenes);
   }
 
   this.mutate = function() {
     for (var i = 0; i < this.genes.length; i++) {
-      if (random(1) < 0.01) {
+      if (mutationAgent.trigger()) {
         this.genes[i] = p5.Vector.random2D();
         this.genes[i].setMag(maxForce);
       }
     }
   }
 }
+
+

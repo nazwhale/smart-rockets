@@ -4,11 +4,7 @@ function Rocket(dna) {
   this.acceleration = createVector();
   this.completed = false;
   this.crashed = false;
-  if (dna) {
-    this.dna = dna;
-  } else {
-    this.dna = new DNA;
-  }
+  this.dna = dna;
   this.fitness = 0;
   this.finishTime = 0;
   this.crashTime = 0;

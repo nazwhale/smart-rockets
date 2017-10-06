@@ -1,10 +1,10 @@
-function Population() {
+function Population(mutationAgent) {
   this.rockets = [];
   this.popSize = 25;
   this.matingPool = []
 
   for(var i = 0; i < this.popSize; i++) {
-    this.rockets[i] = new Rocket();
+    this.rockets[i] = new Rocket(new DNA(mutationAgent));
   }
 
   this.evaluate = function() {
