@@ -20,11 +20,8 @@ function Rocket(dna) {
     this.fitness = map(distance, 0, width, width, 0);
 
     if (this.completed) {
-      console.log(this.fitness);
-      console.log("Finish time: " + this.finishTime);
       this.fitness += this.finishTime * 5;          //speed bonus
       this.fitness *= 10;
-      console.log(this.fitness);
     }
     if (this.crashed) {
       this.fitness /= 10;
@@ -35,15 +32,15 @@ function Rocket(dna) {
     }
   }
 
-  this.update = function() {
+  this.update = function(horizontal, vertical) {
     var targetDistance = dist(this.position.x, this.position.y, target.x, target.y);
-    if (targetDistance < 10) {
+    if (targetDistance < 30) {
       this.completed = true;
       this.position = target.copy();
       this.finishTime += 1;
     }
 
-    if (this.position.x > rx && this.position.x < rx + rw && this.position.y > ry && this.position.y < ry + rh) {
+    if (this.position.x > horizontal && this.position.x < horizontal + rw && this.position.y > vertical && this.position.y < vertical + rh) {
       this.crashed = true;
       this.crashTime += 1;
     }

@@ -13,15 +13,13 @@
   <script language="javascript" type="text/javascript" src="dna.js"></script>
 </head>
 <body>
-   <form action="/action_page.php">
-       Lifespan: 
-       <input type="text" name="lifespan"><br>
-       Max Velocity: 
-       <input type="text" name="maxVelocity"><br>
-       Mutation: 
-       <input type="text" name="mutation"><br>
-       <input type="submit" value="Submit">
-   </form> 
+
+  Mutation
+  <input type="range" min="0" max="100" value="3" class="slider" id="mutationRate">
+  Horizontal
+  <input type="range" min="0" max="200" value="100" class="slider" id="horizontal">
+  Vertical
+  <input type="range" min="45" max="280" value="150" class="slider" id="vertical">
 
 </body>
 </html>

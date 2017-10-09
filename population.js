@@ -1,6 +1,6 @@
 function Population(mutationAgent) {
   this.rockets = [];
-  this.popSize = 25;
+  this.popSize = 200;
   this.matingPool = []
 
   for(var i = 0; i < this.popSize; i++) {
@@ -45,9 +45,9 @@ function Population(mutationAgent) {
     this.rockets = babies;
   }
 
-  this.run = function() {
+  this.run = function(horizontal, vertical) {
     for(var i = 0; i < this.popSize; i++) {
-      this.rockets[i].update();
+      this.rockets[i].update(horizontal, vertical);
       this.rockets[i].show();
     }
   }
